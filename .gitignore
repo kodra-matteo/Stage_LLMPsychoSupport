@@ -1,0 +1,12 @@
+# Ambienti virtuali
+venv/
+env/
+.env
+
+# Database locale
+chroma_db/
+
+# File di cache di Python e PyCharm
+__pycache__/
+*.pyc
+.idea/

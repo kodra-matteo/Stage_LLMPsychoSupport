@@ -1,0 +1,21 @@
+CRITERI DIAGNOSTICI E DIAGNOSI DIFFERENZIALE PER LO SPETTRO DELLA SCHIZOFRENIA
+
+1. Disturbo Psicotico Breve (Brief Psychotic Disorder)
+Criteri: Presenza di uno o più dei seguenti sintomi: (1) deliri, (2) allucinazioni, (3) eloquio disorganizzato, (4) comportamento grossolanamente disorganizzato o catatonico.
+Diagnosi differenziale basata sul tempo: La durata di un episodio del disturbo è di almeno 1 giorno, ma meno di 1 mese, con successivo pieno ritorno al livello di funzionamento premorboso.
+
+2. Disturbo Schizofreniforme (Schizophreniform Disorder)
+Criteri: Due (o più) dei seguenti sintomi, ciascuno presente per una parte di tempo significativa durante un periodo di 1 mese: (1) deliri, (2) allucinazioni, (3) eloquio disorganizzato, (4) comportamento grossolanamente disorganizzato, (5) sintomi negativi (es. abulia, appiattimento affettivo).
+Diagnosi differenziale basata sul tempo: Un episodio del disturbo dura almeno 1 mese ma meno di 6 mesi.
+
+3. Schizofrenia (Schizophrenia)
+Criteri: Presenta gli stessi sintomi del Criterio A del Disturbo Schizofreniforme. Vi è un marcato calo del livello di funzionamento (lavoro, relazioni, cura di sé).
+Diagnosi differenziale basata sul tempo: Segni continuativi del disturbo persistono per almeno 6 mesi (questo periodo di 6 mesi deve includere almeno 1 mese di sintomi del Criterio A).
+
+4. Disturbo Schizoaffettivo (Schizoaffective Disorder)
+Criteri: Un periodo ininterrotto di malattia durante il quale è presente un episodio di alterazione dell'umore maggiore (depressivo maggiore o maniacale) in concomitanza con il Criterio A della schizofrenia.
+Diagnosi differenziale: I deliri o le allucinazioni devono essere presenti per almeno 2 settimane in assenza di un episodio di alterazione dell'umore (per distinguerlo da un Disturbo Bipolare o Depressivo con caratteristiche psicotiche).
+
+5. Disturbo Delirante (Delusional Disorder)
+Criteri: Presenza di uno o più deliri per 1 mese o più. Il Criterio A per la schizofrenia non è mai stato soddisfatto (le allucinazioni, se presenti, non sono preminenti e sono correlate al tema delirante).
+Diagnosi differenziale: A parte l'impatto del delirio o delle sue ramificazioni, il funzionamento non è compromesso in modo marcato e il comportamento non è palesemente bizzarro o stravagante.
