@@ -11,7 +11,6 @@ Di seguito la descrizione dei componenti principali del sistema:
 
 * 📁 **`data/` (Cartella)**
   Contiene i file `.txt` con i criteri diagnostici da fornire all'IA. È possibile aggiungere quanti file si desidera: il programma leggerà automaticamente l'intera cartella e analizzerà i file singolarmente.
-  > *Nota: Dividere le nozioni mediche in più file testuali (es. un file per il DSM-5, uno per l'ICD-11, ecc.) rende l'architettura molto più ordinata, scalabile e facile da gestire rispetto all'avere un singolo file gigante.*
 
 * ⚙️ **`database.py`**
   È lo script necessario ad aggiornare le nozioni a disposizione dell'IA. Come citato sopra, ogni volta che vengono aggiunti o modificati dei file `.txt` all'interno della cartella `data`, è necessario eseguire (*runnare*) questo file per ricaricare e aggiornare la memoria del sistema.
