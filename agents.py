@@ -50,8 +50,26 @@ def agent_deductive(state: ClinicalState):
     context = "\n".join([doc.page_content for doc in retriever.invoke(state["structured_data"])])
 
     prompt = ChatPromptTemplate.from_messages([
-        ("system",
-         "Sei uno psichiatra dal ragionamento DEDUTTIVO. Parti dalle linee guida diagnostiche e valuta se i sintomi soddisfano i criteri in modo rigido.\nUsa questo manuale:\n{context}\n\nRestituisci ESATTAMENTE e SOLO una lista numerata delle 3 diagnosi più probabili (es. 1. Nome, 2. Nome, 3. Nome)."),
+        ("system", """Sei uno psichiatra clinico esperto che utilizza il Modello Ipotetico-Deduttivo (Top-Down).
+    Il tuo compito è analizzare il caso clinico verificando rigorosamente la checklist dei criteri diagnostici.
+
+    CONTESTO MEDICO (Manuale):
+    {context}
+
+    ISTRUZIONI DI RAGIONAMENTO (Chain of Thought):
+    1. Formula ipotesi iniziali basate sui sintomi principali.
+    2. Per ogni ipotesi, verifica esplicitamente i criteri diagnostici forniti nel Contesto (es. Criterio A: presente/assente; Criterio temporale: soddisfatto/non soddisfatto).
+    3. Escludi le diagnosi in cui manca anche un solo criterio fondamentale.
+
+    FORMATO DI OUTPUT RICHIESTO:
+    Scrivi la tua risposta dividendo rigorosamente il testo in due sezioni:
+    ANALISI DEDUTTIVA:
+    [Scrivi qui il tuo ragionamento passo passo dimostrando l'applicazione dei criteri]
+
+    CLASSIFICA:
+    1. [Diagnosi più probabile]
+    2. [Seconda diagnosi probabile]
+    3. [Terza diagnosi probabile]"""),
         ("human", "Caso strutturato:\n{case}")
     ])
     chain = prompt | llm
@@ -65,8 +83,26 @@ def agent_inductive(state: ClinicalState):
     context = "\n".join([doc.page_content for doc in retriever.invoke(state["structured_data"])])
 
     prompt = ChatPromptTemplate.from_messages([
-        ("system",
-         "Sei uno psichiatra dal ragionamento INDUTTIVO. Parti dalla durata temporale e dall'evoluzione dei sintomi specifici per risalire alla patologia.\nUsa questo manuale:\n{context}\n\nRestituisci ESATTAMENTE e SOLO una lista numerata delle 3 diagnosi più probabili (es. 1. Nome, 2. Nome, 3. Nome)."),
+        ("system", """Sei uno psichiatra clinico esperto che utilizza il Modello di Pattern Recognition (Ragionamento Induttivo Bottom-Up).
+    Il tuo compito è raggruppare i sintomi ed evincere la traiettoria clinica.
+
+    CONTESTO MEDICO (Manuale):
+    {context}
+
+    ISTRUZIONI DI RAGIONAMENTO (Chain of Thought):
+    1. Raggruppa i sintomi presentati dal paziente in cluster (es. cluster psicotico, cluster affettivo, sintomi negativi).
+    2. Analizza la cronologia e l'evoluzione temporale di questi cluster.
+    3. Costruisci dal basso verso l'alto (dai sintomi alla sindrome) il quadro clinico incrociando i tuoi cluster con il Contesto fornito.
+
+    FORMATO DI OUTPUT RICHIESTO:
+    Scrivi la tua risposta dividendo rigorosamente il testo in due sezioni:
+    ANALISI INDUTTIVA (PATTERN):
+    [Scrivi qui il tuo ragionamento sui cluster e sulla linea temporale]
+
+    CLASSIFICA:
+    1. [Diagnosi più probabile]
+    2. [Seconda diagnosi probabile]
+    3. [Terza diagnosi probabile]"""),
         ("human", "Caso strutturato:\n{case}")
     ])
     chain = prompt | llm
@@ -80,8 +116,27 @@ def agent_case_based(state: ClinicalState):
     context = "\n".join([doc.page_content for doc in retriever.invoke(state["structured_data"])])
 
     prompt = ChatPromptTemplate.from_messages([
-        ("system",
-         "Sei uno psichiatra esperto che usa un approccio CASE-BASED. Valuta quanto il paziente assomiglia al quadro clinico prototipico classico, tralasciando i micro-dettagli tecnici.\nUsa questo manuale:\n{context}\n\nRestituisci ESATTAMENTE e SOLO una lista numerata delle 3 diagnosi più probabili (es. 1. Nome, 2. Nome, 3. Nome)."),
+        ("system", """Sei uno psichiatra clinico esperto che utilizza la Illness Script Theory (Ragionamento Case-Based).
+    Il tuo compito è valutare il grado di somiglianza (matching) tra il paziente e il prototipo classico della malattia.
+
+    CONTESTO MEDICO (Manuale):
+    {context}
+
+    ISTRUZIONI DI RAGIONAMENTO (Chain of Thought):
+    1. Ignora temporaneamente le rigide checklist. Valuta l'immagine globale del paziente (Gestalt).
+    2. Estrai dal Contesto il "prototipo" (Illness Script) delle patologie dello spettro schizofrenico.
+    3. Confronta le caratteristiche cliniche, l'età di esordio e l'impatto sul funzionamento del paziente con i prototipi del manuale.
+    4. Identifica a quale "copione di malattia" il paziente somiglia di più.
+
+    FORMATO DI OUTPUT RICHIESTO:
+    Scrivi la tua risposta dividendo rigorosamente il testo in due sezioni:
+    ANALISI CASE-BASED (ILLNESS SCRIPT):
+    [Scrivi qui il tuo ragionamento valutando la somiglianza con il prototipo]
+
+    CLASSIFICA:
+    1. [Diagnosi più probabile]
+    2. [Seconda diagnosi probabile]
+    3. [Terza diagnosi probabile]"""),
         ("human", "Caso strutturato:\n{case}")
     ])
     chain = prompt | llm
@@ -118,7 +173,10 @@ def layer3_aggregation(state: ClinicalState):
 
     prompt = ChatPromptTemplate.from_messages([
         ("system",
-         "Sei l'Agente Giudice (Supervisore) di un comitato medico. Il tuo compito è unificare i pareri di 3 psichiatri applicando RIGIDAMENTE questa formula matematica:\n\n{instruction}\n\nAlla fine dei calcoli, scrivi chiaramente in grassetto 'DIAGNOSI FINALE AGGREGATA: [Nome Diagnosi]'."),
+         "Sei l'Agente Giudice (Supervisore) di un comitato medico. Il tuo compito è unificare i pareri di 3 psichiatri applicando RIGIDAMENTE questa formula matematica:\n\n{instruction}\n\nAlla fine dei calcoli, scrivi chiaramente in grassetto 'DIAGNOSI FINALE AGGREGATA: [Nome Diagnosi]'"
+        "Alla fine dei calcoli, scrivi chiaramente in grassetto 'DIAGNOSI FINALE AGGREGATA: [Nome Diagnosi]'.\n"
+        "ATTENZIONE: I medici ti hanno fornito sia il loro ragionamento clinico che la loro Classifica finale. "
+        "Per il conteggio matematico dei voti, ignora il testo del ragionamento e guarda ESCLUSIVAMENTE la sezione 'CLASSIFICA' fornita da ciascun medico."),
         ("human",
          "Ecco le 3 classifiche espresse dai medici:\n\nAgente Deduttivo:\n{deductive}\n\nAgente Induttivo:\n{inductive}\n\nAgente Case-Based:\n{case_based}")
     ])
