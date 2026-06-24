@@ -38,7 +38,7 @@ With marked stressor(s) (brief reactive psychosis): If symptoms occur in respons
 Without marked stressor(s): If symptoms do not occur in response to events that,singly or together, would be markedly stressful to almost anyone in similar circum-stances in the individual’s culture.
 With peripartum onset: If onset is during pregnancy or within 4 weeks postpartum.
 Specify if:
-With catatonia (refer to the criteria for catatonia associated with another mental dis-order, p. 135, for definition).Coding note: Use additional code F06.1 catatonia associated with brief psychotic disorder to indicate the presence of the comorbid catatonia.
+With catatonia (refer to the criteria for catatonia associated with another mental disorder, p. 135, for definition).Coding note: Use additional code F06.1 catatonia associated with brief psychotic disorder to indicate the presence of the comorbid catatonia.
 Specify current severity:
 Severity is rated by a quantitative assessment of the primary symptoms of psychosis,including delusions, hallucinations, disorganized speech, abnormal psychomotor be-havior, and negative symptoms. Each of these symptoms may be rated for its current severity (most severe in the last 7 days) on a 5-point scale ranging from 0 (not present)to 4 (present and severe). (See Clinician-Rated Dimensions of Psychosis SymptomSeverity in the chapter “Assessment Measures.”)Note: Diagnosis of brief psychotic disorder can be made without using this severity specifier.
 Differential diagnosis:

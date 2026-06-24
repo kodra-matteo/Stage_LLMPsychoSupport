@@ -15,6 +15,7 @@ class ClinicalState(TypedDict):
     decision_inductive: str
     decision_case_based: str
     final_output: str
+    selected_aggregation_rule: str
 
 # temperatura settata a 0.1 per dare meno spazio creativo possibile all'ai sulle decisioni
 llm = ChatOllama(model="llama3", temperature=0.1)
@@ -146,7 +147,7 @@ def agent_case_based(state: ClinicalState):
 # layer che si occupa di unire i risultati degli agenti secondo la regola di aggregazione selezionata
 def layer3_aggregation(state: ClinicalState):
     """Layer 3: Agente Giudice che applica le regole di aggregazione matematiche"""
-    rule = state.get("selected_aggregation_rule", "majority")
+    rule = state.get("selected_aggregation_rule", "borda")
     print(f"-> Layer 3: Esecuzione dell'aggregazione tramite protocollo: {rule.upper()}...")
 
     # Definiamo le regole matematiche che il Giudice dovrà applicare
