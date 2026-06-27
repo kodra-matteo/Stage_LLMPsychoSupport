@@ -1,4 +1,12 @@
+import os
 import streamlit as st
+from agents import app_graph
+from database import build_database
+
+CHROMA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "chroma_db")
+if not os.path.exists(CHROMA_DIR) or not os.listdir(CHROMA_DIR):
+    build_database()
+
 from agents import app_graph
 
 # 1. CONFIGURAZIONE DELLA PAGINA

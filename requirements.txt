@@ -6,3 +6,7 @@ langgraph~=1.2.4
 langchain-core~=1.4.2
 streamlit~=1.58.0
 chromadb
+langchain-groq
+langchain-huggingface
+python-dotenv
+sentence-transformers

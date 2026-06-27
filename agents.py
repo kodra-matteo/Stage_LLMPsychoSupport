@@ -1,10 +1,19 @@
 from typing import TypedDict
 from langgraph.graph import StateGraph, START, END
-from langchain_ollama import ChatOllama
 from langchain_chroma import Chroma
-from langchain_ollama import OllamaEmbeddings
 from langchain_core.prompts import ChatPromptTemplate
+from dotenv import load_dotenv
+from langchain_groq import ChatGroq
+from langchain_huggingface import HuggingFaceEmbeddings
 import os
+
+load_dotenv()
+
+llm = ChatGroq(
+    model_name="llama-3.3-70b-versatile",
+    temperature=0.1,
+    api_key=os.environ.get("GROQ_API_KEY")
+)
 
 
 # stati dei vari layer
@@ -17,16 +26,17 @@ class ClinicalState(TypedDict):
     final_output: str
     selected_aggregation_rule: str
 
-# temperatura settata a 0.1 per dare meno spazio creativo possibile all'ai sulle decisioni
-llm = ChatOllama(model="llama3", temperature=0.1)
-
 # directory varie
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CHROMA_DIR = os.path.join(BASE_DIR, "chroma_db")
-embeddings = OllamaEmbeddings(model="nomic-embed-text")
 
+# 1. Inizializza il modello per gli embeddings
+embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+
+# 2. Carica il Database Vettoriale passandogli gli embeddings
 vectorstore = Chroma(persist_directory=CHROMA_DIR, embedding_function=embeddings)
-# Chiediamo al DB di restituirci i 2 paragrafi più pertinenti in base ai sintomi
+
+# 3. Crea il motore di ricerca (retriever)
 retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
 
 

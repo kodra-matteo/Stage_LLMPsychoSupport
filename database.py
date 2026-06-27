@@ -3,7 +3,7 @@ import shutil
 from langchain_community.document_loaders import DirectoryLoader, TextLoader # <- Aggiunto DirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
-from langchain_ollama import OllamaEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 # permette di aggiornare le nozioni da dare all'ai. Aggiungiamo nozioni nuove dentro la cartella data (sotto forma di file .txt)
 # runnando database.py aggiorna la memoria della nostra ai che da ora contiene le nozioni aggiornate
 
@@ -39,7 +39,7 @@ def build_database():
     print("Creazione dei vettori in corso...")
 
     # trasforma il testo in array di numeri cosi da renderlo leggibile per l'ai
-    embeddings = OllamaEmbeddings(model="nomic-embed-text")
+    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
     # salva nel database l'array di numeri appena creato
     vectorstore = Chroma.from_documents(
